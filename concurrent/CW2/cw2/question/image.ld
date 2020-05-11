@@ -16,6 +16,7 @@ SECTIONS {
   .bss  : {                         *(.bss         ) }
   /* align       address (per AAPCS) */
   .       = ALIGN( 8 );
+  .heap : {end    = .;_heap_start = .;.             = . + 0x00001000;_heap_end    = .;}
   /* allocate stack for irq mode     */
   .       = . + 0x00001000;
   tos_irq = .;
@@ -23,16 +24,8 @@ SECTIONS {
   .       = . + 0x00001000;
   tos_svc = .;
 
-  /* .       = . + 0x00001000;
-  tos_P3 = .;
 
-  .       = . + 0x00001000;
-  tos_P4 = .;
-
-  .       = . + 0x00001000;
-  tos_P5 = .; */
-
-  .       = . + 0x00014000;
+  .       = . + 0x00050000;
   tos_csl = .;
 
   /* .       = . + 0x0000A000;
